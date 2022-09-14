@@ -12,3 +12,5 @@ vpc_C_subnet_cidr = ["10.2.0.0/24", "10.2.1.0/24"]
 region          = "us-east-1"
 ami             = "ami-0729e439b6769d6ab"
 instance_key    = "devops"
+
+aws_caller_identity = " "  # Your AWS account ID
