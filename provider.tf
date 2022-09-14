@@ -8,7 +8,7 @@ terraform {
   }
   backend "s3" {
     bucket = "terraform-state-bucket-samuelbartels"
-    key    = "devops"
+    key    = "networking/terraform.tfstate"
     region = "us-east-1"
   }
 }

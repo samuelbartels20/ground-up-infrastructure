@@ -9,17 +9,10 @@ resource "aws_iam_policy" "ec2_policy" {
       {
         Effect = "Allow",
         Action = [
-          "ssm:GetParameters",
-          "ssm:GetParameter"
+          "s3:*"
         ],
+        "Resource": "*"
       },
-      {
-        "Effect": "Allow",
-        "Action": [
-            "s3:GetObject",
-            "s3:List*"
-        ],
-      }
     ]
   })
 }
@@ -51,6 +44,6 @@ resource "aws_iam_policy_attachment" "ec2_policy_role" {
 
 #Attach role to an instance profile
 resource "aws_iam_instance_profile" "ec2_profile" {
-  name = "ec2_profile"
+  name = "ec2_profile2"
   role = aws_iam_role.ec2_role.name
 }
