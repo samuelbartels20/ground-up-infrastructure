@@ -39,3 +39,17 @@ resource "aws_vpc" "vpc_C_cidr" {
 
     }
 }
+
+resource "aws_vpc_peering_connection" "vpc_A_to_VPC_B" {
+  peer_owner_id = data.aws_caller_identity.current.account_id
+  peer_vpc_id   = aws_vpc.vpc_B_cidr.id
+  vpc_id        = aws_vpc.vpc_A_cidr.id
+  auto_accept   = true
+}
+
+resource "aws_vpc_peering_connection" "vpc_A_to_VPC_C" {
+  peer_owner_id = data.aws_caller_identity.current.account_id
+  peer_vpc_id   = aws_vpc.vpc_C_cidr.id
+  vpc_id        = aws_vpc.vpc_A_cidr.id
+  auto_accept   = true
+}
