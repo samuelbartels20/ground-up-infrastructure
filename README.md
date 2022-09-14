@@ -1,1 +1,2 @@
-# ground-up-infrastructure<img width="889" alt="image5" src="https://user-images.githubusercontent.com/40799981/189978675-245276a7-f636-4dde-93db-6ac97c7ac831.png">
+![vpc](https://user-images.githubusercontent.com/40799981/190126047-0bb2bac2-2bd0-4cc1-9bbf-289f0817f0a7.png)
+
