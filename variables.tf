@@ -34,4 +34,16 @@ variable "SecureVariableOne" {
 
 variable "ami"{}
 
-variable "instance_key" {}
+variable "instance_key" {
+  description = "SSH key name to launch instances with"
+}
+
+variable "aws_caller_identity"{}
+
+variable "instance_class" {
+  default = "t2.micro"
+}
+
+variable "scenario" {
+  default = "vpc-tgw"
+}
