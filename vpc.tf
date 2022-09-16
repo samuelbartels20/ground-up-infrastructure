@@ -40,6 +40,20 @@ resource "aws_vpc" "vpc_C_cidr" {
     }
 }
 
+# OnPrem VPC
+resource "aws_vpc" "OnPremVpc" {
+
+    cidr_block = var.OnPremVpc_cidr
+    enable_dns_hostnames = true
+
+    tags = {
+
+    Name = "OnPremVpc"
+
+    }
+
+}
+
 resource "aws_vpc_peering_connection" "vpc_A_to_VPC_B" {
   peer_owner_id = data.aws_caller_identity.current.account_id
   peer_vpc_id   = aws_vpc.vpc_B_cidr.id
