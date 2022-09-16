@@ -23,25 +23,33 @@ resource "aws_eip" "eip_for_OnPremVPC_private_subnet" {
   depends_on                = [aws_internet_gateway.internet_gateway_for_OnPremVPC]
 }
 
+
+resource "aws_nat_gateway" "nat_gateway_for_OnPremVPC" {
+  depends_on = [
+    aws_eip.eip_for_OnPremVPC_private_subnet
+  ]
+  connectivity_type = "private"
+  
+  # Associating it in the Public Subnet!
+  subnet_id = aws_subnet.OnPremVpc_private_subnet.id
+  tags = {
+    Name = "OnPremVPC_private_nat_gateway"
+  }
+}
+
 #Internet Gateway
 
 resource "aws_internet_gateway" "internet_gateway_for_VPC_A" {
-
     vpc_id = aws_vpc.vpc_A_cidr.id
-
     tags = {
 
         Name = "internet_gateway_for_VPC_A"
  
     }
-
 }
 
-
 resource "aws_internet_gateway" "internet_gateway_for_VPC_B" {
-
     vpc_id = aws_vpc.vpc_B_cidr.id
-
     tags = {
 
         Name = "internet_gateway_for_VPC_B"
@@ -51,9 +59,7 @@ resource "aws_internet_gateway" "internet_gateway_for_VPC_B" {
 }
 
 resource "aws_internet_gateway" "internet_gateway_for_VPC_C" {
-
     vpc_id = aws_vpc.vpc_C_cidr.id
-
     tags = {
 
         Name = "internet_gateway_for_VPC_C"
@@ -63,15 +69,12 @@ resource "aws_internet_gateway" "internet_gateway_for_VPC_C" {
 }
 
 resource "aws_internet_gateway" "internet_gateway_for_OnPremVPC" {
-
     vpc_id = aws_vpc.OnPremVpc.id
-
     tags = {
 
         Name = "internet_gateway_for_OnPremVPC"
 
     }
-
 }
 
 resource "aws_ec2_transit_gateway" "transit_gateway" {
