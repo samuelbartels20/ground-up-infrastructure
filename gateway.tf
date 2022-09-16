@@ -17,6 +17,11 @@ resource "aws_eip" "eip_for_vpc_C_subnet_AZ1_instance" {
   depends_on                = [aws_internet_gateway.internet_gateway_for_VPC_C]
 }
 
+resource "aws_eip" "eip_for_OnPremVPC_private_subnet" {
+  vpc = true
+  instance                  = aws_instance.app-server_for_OnPremVPC_private_subnet.id
+  depends_on                = [aws_internet_gateway.internet_gateway_for_OnPremVPC]
+}
 
 #Internet Gateway
 
@@ -52,6 +57,18 @@ resource "aws_internet_gateway" "internet_gateway_for_VPC_C" {
     tags = {
 
         Name = "internet_gateway_for_VPC_C"
+
+    }
+
+}
+
+resource "aws_internet_gateway" "internet_gateway_for_OnPremVPC" {
+
+    vpc_id = aws_vpc.OnPremVpc.id
+
+    tags = {
+
+        Name = "internet_gateway_for_OnPremVPC"
 
     }
 
