@@ -58,6 +58,46 @@ resource "aws_route_table" "rt_for_VPC_C" {
 
 }
 
+resource "aws_route_table" "public_rt_for_OnPremVPC" {
+
+    vpc_id = aws_vpc.OnPremVpc.id
+
+    route {
+
+    cidr_block = "0.0.0.0/0"
+
+    gateway_id = aws_internet_gateway.internet_gateway_for_OnPremVPC.id
+
+    }
+
+    tags = {
+
+        Name = "public_rt_for_OnPremVPC"
+
+    }
+
+}
+
+resource "aws_route_table" "nat_gateway_rt_for_OnPremVPC" {
+
+    vpc_id = aws_vpc.OnPremVpc.id
+
+    route {
+
+    cidr_block = "0.0.0.0/0"
+
+    gateway_id = aws_internet_gateway.internet_gateway_for_OnPremVPC.id
+
+    }
+
+    tags = {
+
+        Name = "nat_gateway_rt_for_OnPremVPC"
+
+    }
+
+}
+
 
 # #Associate Public Route Table to Public Subnets
 
