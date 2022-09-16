@@ -86,3 +86,40 @@ resource "aws_instance" "app-server_for_OnPremVPC_public_subnet" {
 locals {
   app-server_for_OnPremVPC_public_subnet = aws_vpc.OnPremVpc.owner_id
 }
+
+
+
+resource "aws_instance" "app-server_for_OnPremVPC" {
+  instance_type          = var.instance_class
+  ami                    = var.ami
+  vpc_security_group_ids = [aws_security_group.security_group_for_OnPremVPC_private_subnet.id]
+  subnet_id              = aws_subnet.OnPremVpc_private_subnet.id
+  iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
+  key_name               = var.instance_key
+
+  associate_public_ip_address = false
+  tags = {
+    Name = "app-server_for_OnPremVPC"
+  }
+}
+locals {
+  app-server_for_OnPremVPC = aws_vpc.OnPremVpc.owner_id
+}
+
+
+resource "aws_instance" "dns-server_for_OnPremVPC" {
+  instance_type          = var.instance_class
+  ami                    = var.ami
+  vpc_security_group_ids = [aws_security_group.security_group_for_OnPremVPC_private_subnet.id]
+  subnet_id              = aws_subnet.OnPremVpc_private_subnet.id
+  iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
+  key_name               = var.instance_key
+
+  associate_public_ip_address = false
+  tags = {
+    Name = "dns-server_for_OnPremVPC"
+  }
+}
+locals {
+  dns-server_for_OnPremVPC = aws_vpc.OnPremVpc.owner_id
+}
