@@ -1,12 +1,12 @@
 variable "vpc_A_cidr" {}
 variable "vpc_B_cidr" {}
 variable "vpc_C_cidr" {}
+variable "OnPremVpc_cidr" {}
 
 variable "vpc_A_subnet_cidr" {}
-
 variable "vpc_B_subnet_cidr" {}
-
 variable "vpc_C_subnet_cidr" {}
+variable "OnPremVpc_subnet_cidr" {}
 
 variable "region" {}
 
@@ -16,7 +16,7 @@ variable "access_key" {
   sensitive = true
 }
 variable "secret_key" {
-  type      = string
+  type      = string     
   default   = ""
   sensitive = true
 }
