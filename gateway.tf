@@ -77,6 +77,7 @@ resource "aws_internet_gateway" "internet_gateway_for_OnPremVPC" {
     }
 }
 
+
 resource "aws_ec2_transit_gateway" "transit_gateway" {
   description                     = "Transit Gateway with 3 VPCs, 2 subnets each"
   default_route_table_association = "disable"
