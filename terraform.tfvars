@@ -15,4 +15,4 @@ region          = "us-east-1"
 ami             = "ami-0729e439b6769d6ab"
 instance_key    = "devops"
 
-aws_caller_identity = " " #AWS account ID
+aws_caller_identity = " " # aws account id
