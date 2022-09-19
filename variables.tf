@@ -1,7 +1,9 @@
 variable "vpc_A_cidr" {}
 variable "vpc_B_cidr" {}
 variable "vpc_C_cidr" {}
-variable "OnPremVpc_cidr" {}
+variable "OnPremVpc_cidr" {
+  description = "VPC for simulated on-prem environment."
+}
 
 variable "vpc_A_subnet_cidr" {}
 variable "vpc_B_subnet_cidr" {}
