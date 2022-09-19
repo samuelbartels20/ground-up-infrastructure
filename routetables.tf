@@ -39,15 +39,11 @@ resource "aws_route_table" "rt_for_VPC_B" {
 }
 
 resource "aws_route_table" "rt_for_VPC_C" {
-
     vpc_id = aws_vpc.vpc_C_cidr.id
 
     route {
-
     cidr_block = "0.0.0.0/0"
-
     gateway_id = aws_internet_gateway.internet_gateway_for_VPC_C.id
-
     }
 
     tags = {
@@ -55,19 +51,14 @@ resource "aws_route_table" "rt_for_VPC_C" {
         Name = "rt_for_VPC_C"
 
     }
-
 }
 
 resource "aws_route_table" "public_rt_for_OnPremVPC" {
-
     vpc_id = aws_vpc.OnPremVpc.id
 
     route {
-
     cidr_block = "0.0.0.0/0"
-
     gateway_id = aws_internet_gateway.internet_gateway_for_OnPremVPC.id
-
     }
 
     tags = {
@@ -75,19 +66,15 @@ resource "aws_route_table" "public_rt_for_OnPremVPC" {
         Name = "public_rt_for_OnPremVPC"
 
     }
-
 }
 
-resource "aws_route_table" "nat_gateway_rt_for_OnPremVPC" {
 
+resource "aws_route_table" "nat_rt_for_OnPremVPC" {
     vpc_id = aws_vpc.OnPremVpc.id
 
     route {
-
     cidr_block = "0.0.0.0/0"
-
     gateway_id = aws_internet_gateway.internet_gateway_for_OnPremVPC.id
-
     }
 
     tags = {
@@ -95,58 +82,49 @@ resource "aws_route_table" "nat_gateway_rt_for_OnPremVPC" {
         Name = "nat_gateway_rt_for_OnPremVPC"
 
     }
-
 }
 
 
 # #Associate Public Route Table to Public Subnets
 
 resource "aws_route_table_association" "rt_association_for_VPC_A_subnet_AZ1" {
-
     subnet_id = aws_subnet.vpc_A_subnet_AZ1.id
-
     route_table_id = aws_route_table.rt_for_VPC_A.id
-
 }
 
 resource "aws_route_table_association" "rt_association_for_VPC_A_subnet_AZ2" {
-
     subnet_id = aws_subnet.vpc_A_subnet_AZ2.id
-
     route_table_id = aws_route_table.rt_for_VPC_A.id
-
 }
 
 resource "aws_route_table_association" "rt_association_for_VPC_B_subnet_AZ1" {
-
     subnet_id = aws_subnet.vpc_B_subnet_AZ1.id
-
     route_table_id = aws_route_table.rt_for_VPC_B.id
-
 }
 
 resource "aws_route_table_association" "rt_association_for_VPC_B_subnet_AZ2" {
-
     subnet_id = aws_subnet.vpc_B_subnet_AZ2.id
-
     route_table_id = aws_route_table.rt_for_VPC_B.id
-
 }
 
 resource "aws_route_table_association" "rt_association_for_VPC_C_subnet_AZ1" {
-
     subnet_id = aws_subnet.vpc_C_subnet_AZ1.id
-
     route_table_id = aws_route_table.rt_for_VPC_C.id
-
 }
 
 resource "aws_route_table_association" "rt_association_for_VPC_C_subnet_AZ2" {
-
     subnet_id = aws_subnet.vpc_C_subnet_AZ2.id
-
     route_table_id = aws_route_table.rt_for_VPC_C.id
+}
 
+resource "aws_route_table_association" "rt_association_for_OnPremVPC_private_subnet" {
+    subnet_id = aws_subnet.OnPremVpc_private_subnet.id
+    route_table_id = aws_route_table.nat_rt_for_OnPremVPC.id
+}
+
+resource "aws_route_table_association" "rt_association_for_OnPremVPC_public_subnet" {
+    subnet_id = aws_subnet.OnPremVpc_public_subnet.id
+    route_table_id = aws_route_table.public_rt_for_OnPremVPC.id
 }
 
 resource "aws_route" "VPC_A_rt_to_VPC_B_rt" {
