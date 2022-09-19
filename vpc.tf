@@ -1,10 +1,9 @@
 # Create a VPC A
 
 resource "aws_vpc" "vpc_A_cidr" {
-
     cidr_block = var.vpc_A_cidr
     enable_dns_hostnames = true
-
+    enable_dns_support = true
     tags = {
 
     Name = "vpc A"
@@ -17,8 +16,7 @@ resource "aws_vpc" "vpc_A_cidr" {
 resource "aws_vpc" "vpc_B_cidr" {
   cidr_block = var.vpc_B_cidr
   enable_dns_hostnames = true
-
-
+  enable_dns_support = true
   tags = {
 
     Name = "vpc B"
@@ -31,8 +29,7 @@ resource "aws_vpc" "vpc_B_cidr" {
 resource "aws_vpc" "vpc_C_cidr" {
   cidr_block = var.vpc_C_cidr
   enable_dns_hostnames = true
-
-
+  enable_dns_support = true
   tags = {
 
     Name = "vpc C"
@@ -42,10 +39,9 @@ resource "aws_vpc" "vpc_C_cidr" {
 
 # OnPrem VPC
 resource "aws_vpc" "OnPremVpc" {
-
     cidr_block = var.OnPremVpc_cidr
     enable_dns_hostnames = true
-
+    enable_dns_support = true
     tags = {
 
     Name = "OnPremVpc"
