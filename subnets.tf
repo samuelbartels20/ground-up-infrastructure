@@ -237,7 +237,6 @@ resource "aws_subnet" "vpc_C_subnet_AZ2-TGW" {
 
 # OnPrem VPC
 resource "aws_subnet" "OnPremVpc_public_subnet" {
-
     cidr_block = var.OnPremVpc_subnet_cidr[0]
 
     vpc_id = aws_vpc.OnPremVpc.id
@@ -260,7 +259,7 @@ resource "aws_subnet" "OnPremVpc_private_subnet" {
 
     vpc_id = aws_vpc.OnPremVpc.id
 
-    map_public_ip_on_launch = true
+    map_public_ip_on_launch = false
 
     availability_zone = data.aws_availability_zones.available.names[1]
 
